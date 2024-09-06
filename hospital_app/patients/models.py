@@ -24,3 +24,11 @@ class Appointment(models.Model):
 
     def __str__(self):
         return f"Appointment for {self.patient} on {self.appointment_date} at {self.appointment_time}"
+
+class Payment(models.Model):
+    appointment = models.ForeignKey(Appointment, on_delete=models.CASCADE)  
+    amount = models.DecimalField(max_digits=10, decimal_places=2)
+    payment_date = models.DateField()
+
+    def __str__(self):
+        return f"Payment of {self.amount} for {self.appointment.patient} on {self.payment_date}"
